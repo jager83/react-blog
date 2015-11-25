@@ -14,7 +14,7 @@ function watchTask(gulp, options, basedir, ENV) {
 
     let semaphore;
     gulp
-      .watch(options.dest + '/components/**/*.*' , (event) => {
+      .watch(options.dest + '/bundle/**/*.js' , (event) => {
         clearTimeout(semaphore);
 
         semaphore = setTimeout(() => {
@@ -22,6 +22,8 @@ function watchTask(gulp, options, basedir, ENV) {
         }, DEBOUNCE_BROWSER_RELOADING_MS);
       })
     ;
+
+
 
     watch(options.src + '/**/*.scss', batch((events, done) => {
       gulp
@@ -31,10 +33,14 @@ function watchTask(gulp, options, basedir, ENV) {
       ;
     }));
 
-    watch(options.src + '/**/*.ts', batch((events, done) => {
+    watch(options.src + '/**/*.js', batch((events, done) => {
       gulp
         .start('javascript', () => {
-          done();
+          gulp
+            .start('browserify', () => {
+              done();
+            })
+          ;
         })
       ;
     }));

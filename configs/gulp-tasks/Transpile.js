@@ -11,7 +11,6 @@ function taskTranspile(gulp, options) {
 
   return function() {
 
-    console.log(options);
     return gulp
       .src(options.src + '**/*.{js,es6}')
 
@@ -19,14 +18,11 @@ function taskTranspile(gulp, options) {
 //      .pipe(eslint.formatEach('stylish', process.stderr))
 
       .pipe(sourcemaps.init())
-
       .pipe(babel({
         presets: ['es2015']
       }).on('error', function(error) {
-        console.log(error);
         console.log('\nGulp.Transpile:' + error.name, '\n', error.loc, '\n', error.fileName, '\n');
       }))
-
       .pipe(sourcemaps.write('./sourcemaps'))
       .pipe(gulp.dest(options.dest))
 
