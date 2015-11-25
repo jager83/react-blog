@@ -23,7 +23,7 @@ function taskTranspile(gulp, options) {
       .pipe(gulp.dest(options.dest + '/bundle'))
     ;
 
-    return globby([options.dest + '/frontend/**/*.js'])
+    return globby([options.dest + '/frontend/**/*.js', options.dest + '/frontend/**/*.jsx'])
       .then(entries => {
 
         browserify({

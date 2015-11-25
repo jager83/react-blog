@@ -23,7 +23,6 @@ let
   ;
 
 gulp.task('javascript', task('Transpile.js'));
-gulp.task('includes', task('GenerateIncludes.js'));
 gulp.task('css', task('CssDevelopment.js'));
 gulp.task('watch', task('Watch.js'));
 gulp.task('browserify', task('Browserify.js'));
