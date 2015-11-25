@@ -1,0 +1,14 @@
+{
+   "restartable": "rs",
+   "verbose": false,
+   "watch" : [
+      "./dist",
+      "./examples/src",
+      "./examples/images",
+      "./test"
+   ],
+   "env": {
+      "NODE_ENV" : "development"
+   },
+   "ext": "js css"
+}
