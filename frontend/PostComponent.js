@@ -1,5 +1,4 @@
 import React from 'React';
-import ReactDOM from 'react-dom';
 
 class Post extends React.Component {
 
