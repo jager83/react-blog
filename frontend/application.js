@@ -14,21 +14,41 @@ class PostList extends React.Component {
       posts: []
     };
 
-    this.currentPage = 1;
-    this.itemsPerPage = 10;
-    this.order = "ASC";
+    this._currentPage = 1;
+    this._itemsPerPage = 10;
+    this._order = "ASC";
   }
 
   componentDidMount() {
     return this.loadPosts();
   }
 
+  set page(val) {
+    val = Number(val);
+
+    if(!isNaN(val) && (val > 0)) {
+      this._currentPage = val;
+    }
+  }
+
+  set itemsPerPage(val) {
+    val = Number(val);
+
+    if(!isNaN(val) && (val > 0)) {
+      this._itemsPerPage = val;
+    }
+  }
+
+  set orderBy(val) {
+    this._order = (val || '').toUpperCase() === 'DESC' ? 'DESC' : 'ASC';
+  }
+
   loadPosts() {
     return $
       .get(API, {
-        page : this.currentPage,
-        itemsPerPage: this.itemsPerPage,
-        orderBy: this.order
+        page : this._currentPage,
+        itemsPerPage: this._itemsPerPage,
+        orderBy: this._order
       })
       .then(posts => {
         this.setState({posts});
