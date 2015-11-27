@@ -2,13 +2,11 @@
    "restartable": "rs",
    "verbose": false,
    "watch" : [
-      "./dist",
-      "./examples/src",
-      "./examples/images",
-      "./test"
+      "server",
+      "backend/"
    ],
    "env": {
       "NODE_ENV" : "development"
    },
-   "ext": "js css"
+   "ext": "js"
 }

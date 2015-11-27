@@ -1,21 +1,51 @@
+import React from 'React';
+import ReactDOM from 'react-dom';
+import Post from "./PostComponent";
+import $ from "jquery";
 
-var React = require('react');
-var ReactDOM = require('react-dom');
+const API = "/posts";
 
-var HelloMessage = React.createClass({
-  displayName: "HelloMessage",
+class PostList extends React.Component {
+  constructor(props) {
+    super(props);
 
-  render: function render() {
-    return React.createElement(
-      "div",
-      null,
-      "Hello ",
-      this.props.name
+    this.state = {
+      posts: []
+    };
+  }
+
+  componentDidMount() {
+
+    $
+      .get(API)
+      .then(posts => {
+        this.setState({posts});
+      })
+    ;
+  }
+
+  render() {
+    let items = this.state.posts;
+
+    return (
+      <section className="container">
+        <hr/>
+        <div className="row">
+          <div className="col-xs-12">
+            {
+              items.map((item, index) => <Post key={index + 1} title={item.title} content={item.content} id={item.id}
+                                               createdDate={item.createdDate} category={item.category}/>)
+            }
+          </div>
+        </div>
+        <hr/>
+      </section>
     );
   }
-});
+}
 
 
-document.addEventListener('DOMContentLoaded', () => {
-  ReactDOM.render(React.createElement(HelloMessage, { name: "John" }), document.getElementById('root'));
-});
+ReactDOM.render(
+  <PostList />,
+  document.getElementById('root')
+);

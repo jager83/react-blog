@@ -19,9 +19,10 @@ function taskTranspile(gulp, options) {
 
       .pipe(sourcemaps.init())
       .pipe(babel({
-        presets: ['es2015']
+        presets: ['es2015', 'react']
       }).on('error', function(error) {
         console.log('\nGulp.Transpile:' + error.name, '\n', error.loc, '\n', error.fileName, '\n');
+        console.log('trace', error);
       }))
       .pipe(sourcemaps.write('./sourcemaps'))
       .pipe(gulp.dest(options.dest))
